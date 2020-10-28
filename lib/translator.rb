@@ -17,8 +17,8 @@ end
 def get_japanese_emoticon(filePath, emoticon)
   tempHash = load_library(filePath)
   
-  tempHash.select do |k|
-    if tempHash[k][:english] == emoticon
+  tempHash.select do |k,v|
+    if v[:english] == emoticon
       return tempHash.dig(k, :japanese)
     end
   end
@@ -29,6 +29,6 @@ end
 def get_english_meaning(filePath, emoticon)
   tempHash = load_library(filePath)
   
-  englishMeaning = (tempHash.select { |k| tempHash[k][:japanese] == emoticon}).keys.join
+  englishMeaning = (tempHash.select { |k,v| v[:japanese] == emoticon}).keys.join
   tempHash.include?(englishMeaning) ? englishMeaning : "Sorry, that emoticon was not found"
 end
